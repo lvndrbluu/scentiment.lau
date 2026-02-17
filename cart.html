@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scentiment | Cart</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Playfair Display',serif;}
+body{background:#f5f1e6;color:#3a3a3a;}
+
+nav{
+  background:#dddbcf;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 40px;
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:1.4rem;
+  font-weight:bold;
+  color:#ff8b42;
+  letter-spacing:2px;
+}
+
+/* Right side container */
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+
+.nav-icons{
+  display:flex;
+  gap:15px;
+  align-items:center;
+}
+
+.nav-icons i{
+  font-size:20px;
+  cursor:pointer;
+}
+
+.cart-count{
+  color:#ff6b1a;
+  font-weight:bold;
+  font-size:14px;
+  margin-left:3px;
+}
+
+.menu-toggle{
+  font-size:1.8rem;
+  cursor:pointer;
+  display:none;
+}
+
+.links{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.links a{
+  text-decoration:none;
+  font-weight:bold;
+  color:#3a3a3a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+nav a:hover{color:#ff6b1a;}
+
+.search-wrapper{
+  position:relative;
+}
+
+.search-input{
+  position:absolute;
+  right:0;
+  top:35px;
+  width:0;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  outline:none;
+  opacity:0;
+  transition:all 0.4s ease;
+}
+
+.search-wrapper.active .search-input{
+  width:220px;
+  opacity:1;
+}
+
+.container{
+  max-width:800px;
+  margin:130px auto 50px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.cart-item{
+  background:#ede6d8;
+  padding:15px 20px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 8px 18px rgba(0,0,0,0.2);
+}
+
+.item-left{display:flex;gap:10px;align-items:center;}
+.item-info{display:flex;flex-direction:column;}
+.item-price{font-weight:bold;margin-top:4px;}
+
+.item-actions{display:flex;gap:5px;align-items:center;}
+
+.item-actions button{
+  padding:6px 12px;
+  background:#ff8b42;
+  border:none;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.item-actions button:hover{background:#ff6b1a;}
+
+#total{margin-top:20px;font-weight:bold;text-align:center;}
+
+#checkout-btn{
+  display:block;
+  margin:15px auto 0;
+  padding:12px 25px;
+  background:#ff8b42;
+  border:none;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+#checkout-btn:hover{background:#ff6b1a;}
+
+footer{text-align:center;padding:20px;margin-top:40px;font-size:0.9rem;}
+footer hr{border:0;border-top:1px solid #3a3a3a;margin-bottom:10px;}
+
+@media(max-width:768px){
+
+  nav{padding:18px 20px;}
+
+  .links{
+    position:fixed;
+    top:70px;
+    right:-250px;
+    background:#dddbcf;
+    flex-direction:column;
+    width:220px;
+    text-align:center;
+    padding:20px 0;
+    box-shadow:-5px 5px 15px rgba(0,0,0,0.2);
+    transition:0.3s ease;
+  }
+
+  .links.active{right:0;}
+
+  .links a{
+    padding:15px 0;
+    width:100%;
+    justify-content:center;
+  }
+
+  .nav-icons{
+    display:none;
+  }
+
+  .menu-toggle{
+    display:block;
+  }
+
+  .links a.icon-link i{
+    font-size:24px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="logo">SCENTIMENT</div>
+
+  <div class="links" id="navLinks">
+    <a href="home.html">Home</a>
+    <a href="products.html">Products</a>
+    <a href="aboutus.html">About</a>
+    <a href="contact.html">Contact</a>
+
+    <a href="cart.html" class="icon-link">
+      <i class="fas fa-shopping-cart"></i>
+      <span class="cart-count" id="cart-count">0</span>
+    </a>
+    <a href="profile.html" class="icon-link">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+
+
+  <div class="nav-right">
+
+    <div class="search-wrapper" id="searchWrapper">
+      <i class="fas fa-search" id="searchToggle"></i>
+      <input type="text" class="search-input" placeholder="Search products...">
+    </div>
+
+    <div class="nav-icons">
+      <a href="cart.html">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cart-count-desktop">0</span>
+      </a>
+      <a href="profile.html"><i class="fas fa-user"></i></a>
+    </div>
+    
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  </div>
+</nav>
+
+<div class="container" id="cartContainer"></div>
+<p id="total"></p>
+<button id="checkout-btn">Check Out</button>
+
+<footer>
+<hr>
+© 2026 Scentiment. All Rights Reserved.
+</footer>
+
+<script>
+const prices={
+"Lavender":120,"Rose":140,"Lemon":130,"Grapefruit":135,"Ylang-Ylang":145,
+"Citronella":150,"Orange":120,"Vanilla":130,"Jasmine":140,"Sandalwood":150,
+"Relaxation Bundle":350,"Summer Citrus Bundle":400,"Mood Lifter Bundle":450,"Citronella Duo":280
+};
+
+const bundleContents={
+"Relaxation Bundle":["Lavender","Vanilla","Rose"],
+"Summer Citrus Bundle":["Orange","Lemon","Grapefruit"],
+"Mood Lifter Bundle":["Jasmine","Ylang-Ylang","Sandalwood"],
+"Citronella Duo":["Citronella","Citronella"]
+};
+
+let cart=JSON.parse(localStorage.getItem('cart'))||[];
+
+function renderCart(){
+const container=document.getElementById('cartContainer');
+container.innerHTML='';
+cart.forEach((item,index)=>{
+const div=document.createElement('div');
+div.className='cart-item';
+let display=bundleContents[item]?"("+bundleContents[item].join(", ")+")":"";
+div.innerHTML=`
+<div class="item-left">
+<input type="checkbox" checked onchange="updateTotal()">
+<div class="item-info" data-price="${prices[item]}">
+<span>${item} ${display}</span>
+<span class="item-price">₱${prices[item]}</span>
+</div>
+</div>
+<div class="item-actions">
+<button onclick="decreaseQty(${index})">-</button>
+<span class="qty">1</span>
+<button onclick="increaseQty(${index})">+</button>
+</div>`;
+container.appendChild(div);
+});
+updateTotal();
+updateCartCount();
+}
+
+function updateTotal(){
+let total=0;
+document.querySelectorAll('.cart-item').forEach(item=>{
+if(item.querySelector('input').checked){
+const price=parseInt(item.querySelector('.item-info').dataset.price);
+const qty=parseInt(item.querySelector('.qty').innerText);
+total+=price*qty;
+}});
+document.getElementById('total').innerText='Total: ₱'+total;
+}
+
+function increaseQty(i){
+const qty=document.querySelectorAll('.qty')[i];
+qty.innerText=parseInt(qty.innerText)+1;
+updateTotal();
+}
+
+function decreaseQty(i){
+const qty=document.querySelectorAll('.qty')[i];
+let val=parseInt(qty.innerText);
+if(val>1){qty.innerText=val-1;}
+else{cart.splice(i,1);localStorage.setItem('cart',JSON.stringify(cart));renderCart();}
+updateTotal();
+}
+
+function updateCartCount(){
+document.getElementById('cart-count').innerText=cart.length;
+document.getElementById('cart-count-desktop').innerText=cart.length;
+}
+
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active");
+}
+
+/* SEARCH TOGGLE */
+document.getElementById("searchToggle").onclick=function(){
+document.getElementById("searchWrapper").classList.toggle("active");
+};
+
+document.getElementById('checkout-btn').onclick=()=>{
+alert("Order placed successfully!");
+};
+
+renderCart();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scentiment | Contact</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Playfair Display', serif;}
+body{background:#f5f1e6;color:#3a3a3a;text-align:center;line-height:1.7;}
+nav{background:#dddbcf;display:flex;justify-content:space-between;align-items:center;padding:18px 40px;position:fixed;width:100%;top:0;left:0;z-index:1000;}
+.logo{font-size:1.4rem;font-weight:bold;color:#ff8b42;letter-spacing:2px;}
+.links{display:flex;gap:25px;}
+nav a{text-decoration:none;font-weight:bold;color:#3a3a3a;}
+nav a:hover{color:#ff6b1a;}
+nav a.active{color:#ff6b1a;}
+.menu-toggle{display:none;font-size:1.8rem;cursor:pointer;color:#3a3a3a;}
+h1{margin:130px 0 20px;}
+.form-box{max-width:300px;margin:30px auto;background:white;color:#3a3a3a;padding:25px;border-radius:12px;}
+input, textarea{width:100%;margin:10px 0;padding:10px;border-radius:6px;border:1px solid #ccc;}
+button{background:#ff8b42;border:none;padding:10px 20px;color:white;border-radius:6px;cursor:pointer;font-family:'Playfair Display', serif;}
+button:hover{background:#ff6b1a;}
+footer{text-align:center;padding:20px;margin-top:40px;font-size:0.9rem;color:#3a3a3a;}
+footer hr{border:0;border-top:1px solid #3a3a3a;margin-bottom:10px;}
+@media(max-width:768px){
+.menu-toggle{display:block;}
+.links{position:fixed;top:70px;right:0;background:#dddbcf;flex-direction:column;width:220px;text-align:center;padding:20px 0;display:none;box-shadow:-5px 5px 15px rgba(0,0,0,0.2);}
+.links a{padding:15px 0;width:100%;}
+.links.active{display:flex;}
+}
+</style>
+</head>
+<body>
+<nav>
+<div class="logo">SCENTIMENT</div>
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+<div class="links" id="navLinks">
+<a href="home.html">Home</a>
+<a href="products.html">Products</a>
+<a href="aboutus.html">About</a>
+<a href="contact.html" class="active">Contact</a>
+<a href="cart.html">Cart</a>
+</div>
+</nav>
+
+<h1>Contact Us</h1>
+<div class="form-box">
+<p>Email: scentiment@gmail.com</p>
+<p>Phone: 0912-345-6789</p>
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<textarea placeholder="Message"></textarea>
+<button>Send</button>
+</div>
+
+<footer>
+<hr>
+© 2026 Scentiment. All Rights Reserved.
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById("navLinks").classList.toggle("active");}
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scentiment | Bundles</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Playfair Display', serif; }
+body { background:#f5f1e6; color:#3a3a3a; text-align:center; }
+nav { background:#dddbcf; display:flex; justify-content:space-between; align-items:center; padding:18px 40px; position:fixed; width:100%; top:0; left:0; z-index:1000; }
+.logo { font-size:1.4rem; font-weight:bold; color:#ff8b42; letter-spacing:2px; }
+.links { display:flex; gap:25px; }
+nav a { text-decoration:none; font-weight:bold; color:#3a3a3a; }
+nav a:hover { color:#ff6b1a; }
+nav a.active { color:#ff6b1a; }
+.menu-toggle { display:none; font-size:1.8rem; cursor:pointer; color:#3a3a3a; }
+h1 { margin:130px 0 20px; }
+.container { padding:30px; display:flex; flex-wrap:wrap; justify-content:center; gap:25px; }
+.card { background:#ede6d8; color:#3a3a3a; width:260px; padding:20px; border-radius:12px; box-shadow:0 6px 15px rgba(0,0,0,0.2); transition:transform 0.3s; }
+.card:hover { transform:scale(1.05); box-shadow:0 10px 25px rgba(0,0,0,0.3); }
+button { background:#ff8b42; border:none; padding:10px 18px; color:white; border-radius:6px; cursor:pointer; margin-top:10px; font-family:'Playfair Display', serif; }
+button:hover { background:#ff6b1a; }
+
+#message { position:fixed; top:100px; right:20px; background:#ff8b42; color:white; padding:10px 15px; border-radius:10px; display:none; z-index:2000; }
+
+footer { text-align:center; padding:20px; margin-top:40px; font-size:0.9rem; color:#3a3a3a; }
+footer hr { border:0; border-top:1px solid #3a3a3a; margin-bottom:10px; }
+
+@media(max-width:768px){
+  .menu-toggle { display:block; }
+  .links { position:fixed; top:70px; right:0; background:#dddbcf; flex-direction:column; width:220px; text-align:center; padding:20px 0; display:none; box-shadow:-5px 5px 15px rgba(0,0,0,0.2); }
+  .links a { padding:15px 0; width:100%; }
+  .links.active { display:flex; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">SCENTIMENT</div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="links" id="navLinks">
+    <a href="home.html">Home</a>
+    <a href="products.html" class="active">Products</a>
+    <a href="aboutus.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="cart.html">Cart</a>
+  </div>
+</nav>
+
+<h1>Bundle Packs</h1>
+
+<div class="container">
+  <div class="card">
+    <h3>Relaxation Bundle</h3>
+    <p>Lavender + Vanilla + Rose</p>
+    <p>₱350</p>
+    <button onclick="addToCart('Relaxation Bundle')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <h3>Summer Citrus Bundle</h3>
+    <p>Orange + Lemon + Grapefruit</p>
+    <p>₱400</p>
+    <button onclick="addToCart('Summer Citrus Bundle')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <h3>Mood Lifter Bundle</h3>
+    <p>Jasmine + Ylang-Ylang + Sandalwood</p>
+    <p>₱450</p>
+    <button onclick="addToCart('Mood Lifter Bundle')">Add to Cart</button>
+  </div>
+  <div class="card">
+    <h3>Citronella Duo</h3>
+    <p>2 x Citronella Candles</p>
+    <p>₱280</p>
+    <button onclick="addToCart('Citronella Duo')">Add to Cart</button>
+  </div>
+</div>
+
+<div id="message"></div>
+
+<footer>
+  <hr>
+  © 2026 Scentiment. All Rights Reserved.
+</footer>
+
+<script>
+function toggleMenu() { document.getElementById("navLinks").classList.toggle("active"); }
+function addToCart(item) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  cart.push(item);
+  localStorage.setItem('cart', JSON.stringify(cart));
+  const message = document.getElementById('message');
+  message.innerText = item + " added to cart";
+  message.style.display = 'block';
+  setTimeout(() => { message.style.display = 'none'; }, 2000);
+}
+</script>
+
+</body>
+</html>
